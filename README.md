@@ -1,1 +1,0 @@
-This is a .net core study project!!
