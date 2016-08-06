@@ -27,17 +27,20 @@ namespace TestArea
         public IConfigurationRoot Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+
+
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<MyStopWatch>();
+            //依赖注入容器中添加StopWatch
+            //services.AddTransient<StopWatch>();
             services.AddMvc();
         }
 
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            //记录耗时的中间件
-            app.UseMiddleware<TimeMiddleware>();
+            //记录耗时的中间件,直接给出所需参数
+            app.UseMiddleware<TimeMiddleware>(new StopWatch());
 
             //强制等待的中间件
             app.Use(next =>
@@ -58,37 +61,28 @@ namespace TestArea
             });
         }
 
+        //计时器中间件
         public class TimeMiddleware
         {
             private RequestDelegate _next;
-            private MyStopWatch _watch;
-            private string _name;
-
-            public TimeMiddleware(RequestDelegate next, MyStopWatch watch)
+            private StopWatch _watch;
+            //StopWatch会自动注入
+            public TimeMiddleware(RequestDelegate next, StopWatch watch)
             {
-                _name = "2";
                 _next = next;
                 _watch = watch;
             }
-
-            public TimeMiddleware(MyStopWatch watch, RequestDelegate next)
-            {
-                _name = "1";
-                _next = next;
-                _watch = watch;
-            }
-
-            
 
             public async Task Invoke(HttpContext context)
             {
                 _watch?.Start();
-               await _next.Invoke(context);   //调用后面中间件
-                await context.Response.WriteAsync($"<div class=\"alert alert-info\" rol=\"alert\">共耗时:{_watch?.GetMillionSeconds()} 毫秒!  {_name}</div>");
+                await _next.Invoke(context);   //调用后面中间件
+                await context.Response.WriteAsync($"<div class=\"alert alert-info\" rol=\"alert\">共耗时:{_watch?.GetMillionSeconds()} 毫秒!</div>");
             }
         }
 
-        public class MyStopWatch
+        //计时器类
+        public class StopWatch
         {
             public DateTime StartTime { get; private set; } = DateTime.Now;
 
@@ -99,9 +93,10 @@ namespace TestArea
 
             public double GetMillionSeconds()
             {
-                var ts = DateTime.Now - StartTime;
-                return ts.TotalMilliseconds;
+                return (DateTime.Now - StartTime).TotalMilliseconds;
             }
         }
+
+
     }
 }
