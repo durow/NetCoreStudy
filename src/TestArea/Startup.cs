@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
 using System.Threading;
+using TestArea.Middlewares;
 
 namespace TestArea
 {
@@ -39,8 +40,8 @@ namespace TestArea
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            //记录耗时的中间件,直接给出所需参数
-            app.UseMiddleware<TimeMiddleware>(new StopWatch());
+            //使用Use方法注册中间件类
+            app.Use(next =>new SimpleMiddleware(next).Invoke);
 
             //强制等待的中间件
             app.Use(next =>
