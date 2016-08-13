@@ -1,4 +1,4 @@
-﻿{
+{
   "userSecretsId": "aspnet-IdentityStudy-60ddc2db-6011-4136-94f3-88633099abbc",
 
   "dependencies": {
@@ -42,7 +42,9 @@
     "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": {
       "version": "1.0.0-preview2-final",
       "type": "build"
-    }
+    },
+    "Microsoft.EntityFrameworkCore.Sqlite": "1.0.0",
+    "Microsoft.EntityFrameworkCore.Sqlite.Design": "1.0.0"
   },
 
   "tools": {
