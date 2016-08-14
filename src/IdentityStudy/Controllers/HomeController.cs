@@ -14,11 +14,12 @@ namespace IdentityStudy.Controllers
             return View();
         }
 
-        [Authorize(Roles ="Admin")]
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            var header = HttpContext.Request.Headers;
+            var ua = HttpContext.Request.Headers["User-Agent"];
 
+            ViewData["Message"] = "Your application description page.";
             return View();
         }
 
