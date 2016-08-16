@@ -14,20 +14,17 @@ namespace IdentityStudy.Controllers
             return View();
         }
 
+        //需要登录
+        [Authorize]
         public IActionResult About()
         {
-            var header = HttpContext.Request.Headers;
-            var ua = HttpContext.Request.Headers["User-Agent"];
-
-            ViewData["Message"] = "Your application description page.";
             return View();
         }
 
-        [Authorize]
+        //需要“管理员”角色
+        [Authorize(Roles = "管理员")]
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
-
             return View();
         }
 

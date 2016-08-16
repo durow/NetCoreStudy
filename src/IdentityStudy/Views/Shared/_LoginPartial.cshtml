@@ -1,18 +1,18 @@
-﻿@using Microsoft.AspNetCore.Identity
-@using IdentityStudy.Models
+﻿@using IdentityStudy.Models
+@using IdentityStudy.Services
+@using System.Security.Claims;
 
-@inject SignInManager<ApplicationUser> SignInManager
-@inject UserManager<ApplicationUser> UserManager
+@inject IdentityService IdentityService
 
-@if (SignInManager.IsSignedIn(User))
+@if (User.Claims.Any(c=>c.Type == IdentityService.AuthUserName))
 {
     <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">欢迎  @User.FindFirst("UserName").Value !</a>
             </li>
             <li>
-                <button type="submit" class="btn btn-link navbar-btn navbar-link">Log off</button>
+                <button type="submit" class="btn btn-link navbar-btn navbar-link">注销</button>
             </li>
         </ul>
     </form>
@@ -20,7 +20,7 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
-        <li><a asp-area="" asp-controller="Account" asp-action="Login">Log in</a></li>
+        <li><a asp-area="" asp-controller="Account" asp-action="Register">注册</a></li>
+        <li><a asp-area="" asp-controller="Account" asp-action="Login">登录</a></li>
     </ul>
 }
