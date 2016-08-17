@@ -16,7 +16,6 @@ namespace IdentityStudy.Controllers
 
         public AccountController(
             ILoggerFactory loggerFactory,
-            IConfigurationRoot configure,
             IdentityService identityService)
         {
             _logger = loggerFactory.CreateLogger<AccountController>();

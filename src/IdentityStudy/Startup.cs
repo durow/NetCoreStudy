@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using IdentityStudy.Models;
 using IdentityStudy.Services;
 using IdentityStudy.Repositories;
+using IdentityStudy.Extensions;
 
 namespace IdentityStudy
 {
@@ -39,9 +40,7 @@ namespace IdentityStudy
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton(Configuration);
-            services.AddSingleton<IIdentityRepository, IdentityRepository>();
-            services.AddSingleton<IdentityService>();
+            services.AddMyIdentity();
             services.AddMvc();
         }
 
@@ -65,7 +64,7 @@ namespace IdentityStudy
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationScheme = IdentityService.AuthenticationScheme,
-                LoginPath = "/Account/Login",
+                CookieName = "IdentityCookie",
                 AutomaticChallenge = true,
             });
             app.UseMvc(routes =>

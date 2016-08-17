@@ -11,9 +11,6 @@ namespace IdentityStudy.Services
     public class IdentityService
     {
         public const string AuthenticationScheme = "MyAuthCookie";
-        public const string AuthType = "MyAuth";
-        public const string AuthUserName = "UserName";
-        public const string AuthRoleName = "UserRole";
 
         private IIdentityRepository _identityRepository;
 
@@ -35,10 +32,10 @@ namespace IdentityStudy.Services
 
             var roles = await _identityRepository.GetUserRolesAsync(user.UserName);
             AddRoleClaims(ci, roles.ToList());
-
             return new ClaimsPrincipal(ci);
         }
         
+        //注册新用户
         public async Task<IdentityResult> Register(string username, string password)
         {
             if (await _identityRepository.CheckUserNameAsync(username))
@@ -55,8 +52,13 @@ namespace IdentityStudy.Services
 
         private ClaimsIdentity CreateClaimsIdentity(MyUser user)
         {
-            var result = new ClaimsIdentity(AuthenticationScheme, AuthUserName, AuthRoleName);
-            result.AddClaim(new Claim(AuthUserName, user.UserName));
+            //用当前用户信息创建一个ClaimsIdentity
+            //AuthenticationScheme需要和Cookie中间件中AuthenticationScheme一致
+            //如果添加的角色时使用的类型不是ClaimTypes.Role，则需要在此处指定类型
+            //var result = new ClaimsIdentity(AuthenticationScheme,NameType,RoleType);
+            var result = new ClaimsIdentity(AuthenticationScheme);
+            //NameType使用自带的ClaimTypes.Name
+            result.AddClaim(new Claim(ClaimTypes.Name, user.UserName));
             return result;
         }
 
@@ -64,7 +66,8 @@ namespace IdentityStudy.Services
         {
             foreach (var role in roles)
             {
-                claimsIdentity.AddClaim(new Claim(AuthRoleName, role.RoleName));
+                //添加角色时使用自带的ClaimTypes.Role就不需要在新建ClaimsIdentity时指定角色验证类型
+                claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, role.RoleName));
             }
         }
 
