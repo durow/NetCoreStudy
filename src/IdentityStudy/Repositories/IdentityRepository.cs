@@ -35,7 +35,7 @@ namespace IdentityStudy.Repositories
         }
 
         //使用用户名和密码获取用户信息
-        public async Task<MyUser> GetUser(string username, string password)
+        public async Task<MyUser> GetUserAsync(string username, string password)
         {
             const string sql = "SELECT * FROM Users WHERE UserName=@UserName and Password=@Password";
             return await Con.QueryFirstOrDefaultAsync<MyUser>(sql, new { UserName = username, Password = password });

@@ -11,10 +11,7 @@ namespace IdentityStudy.Services
     public class IdentityService
     {
         public const string AuthenticationScheme = "MyAuthCookie";
-
         private IIdentityRepository _identityRepository;
-
-        public MyUser User { get; private set; }
 
         public IdentityService(IIdentityRepository identityRepository)
         {
@@ -24,19 +21,17 @@ namespace IdentityStudy.Services
         //使用用户名和密码获取用户
         public async Task<ClaimsPrincipal> CheckUserAsync(string username, string password)
         {
-            var user = await _identityRepository.GetUser(username, password);
+            var user = await _identityRepository.GetUserAsync(username, password);
             if (user == null) return null;
 
-            User = user;
             var ci = CreateClaimsIdentity(user);
-
             var roles = await _identityRepository.GetUserRolesAsync(user.UserName);
             AddRoleClaims(ci, roles.ToList());
             return new ClaimsPrincipal(ci);
         }
         
         //注册新用户
-        public async Task<IdentityResult> Register(string username, string password)
+        public async Task<IdentityResult> RegisterAsync(string username, string password)
         {
             if (await _identityRepository.CheckUserNameAsync(username))
                 return new IdentityResult( "用户名已经存在!");

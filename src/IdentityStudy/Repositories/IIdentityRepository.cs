@@ -10,7 +10,7 @@ namespace IdentityStudy.Repositories
     public interface IIdentityRepository
     {
         void AddUserAsync(MyUser user);
-        Task<MyUser> GetUser(string username, string password);
+        Task<MyUser> GetUserAsync(string username, string password);
         Task<IEnumerable<MyRole>> GetUserRolesAsync(string username);
         Task<bool> CheckUserNameAsync(string username);
     }

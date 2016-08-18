@@ -76,7 +76,7 @@ namespace IdentityStudy.Controllers
             if (!ModelState.IsValid) return View(model);
 
             //添加新用户
-            var result = await _identityService.Register(model.UserName, model.Password);
+            var result = await _identityService.RegisterAsync(model.UserName, model.Password);
             if(!result.IsSuccess)
             {
                 //失败返回错误
