@@ -37,8 +37,10 @@ namespace LoggingStudy
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
             loggerFactory.AddAyxFileLogger();
             
             if (env.IsDevelopment())

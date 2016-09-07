@@ -11,10 +11,15 @@ namespace LoggingStudy.Controllers
     {
         private ILogger _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILoggerFactory factory)
         {
-            _logger = logger;
+            _logger = factory.CreateLogger<HomeController>();
         }
+
+        //public HomeController(ILogger<HomeController> logger)
+        //{
+        //    _logger = logger;
+        //}
 
         public IActionResult Index()
         {
