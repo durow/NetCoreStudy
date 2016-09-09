@@ -11,32 +11,27 @@ namespace LoggingStudy.Controllers
     {
         private ILogger _logger;
 
-        public HomeController(ILoggerFactory factory)
+        public HomeController(ILogger<HomeController> logger)
         {
-            _logger = factory.CreateLogger<HomeController>();
+            _logger = logger;
         }
-
-        //public HomeController(ILogger<HomeController> logger)
-        //{
-        //    _logger = logger;
-        //}
 
         public IActionResult Index()
         {
-            _logger.LogInformation($"{HttpContext.Connection.RemoteIpAddress.ToString()}访问Home/Index页面！");
+            _logger.LogInformation($"访问Home/Index页面！");
             return View();
         }
 
         public IActionResult About()
         {
-            _logger.LogInformation($"{HttpContext.Connection.RemoteIpAddress.ToString()}访问Home/About页面！");
+            _logger.LogError($"访问Home/About页面！");
             ViewData["Message"] = "Your application description page.";
             return View();
         }
 
         public IActionResult Contact()
         {
-            _logger.LogInformation($"{HttpContext.Connection.RemoteIpAddress.ToString()}访问Home/Contact页面！");
+            _logger.LogWarning($"访问Home/Contact页面！");
             ViewData["Message"] = "Your contact page.";
 
             return View();
@@ -44,7 +39,7 @@ namespace LoggingStudy.Controllers
 
         public IActionResult Error()
         {
-            _logger.LogError($"{HttpContext.Connection.RemoteIpAddress.ToString()}引发错误!");
+            _logger.LogCritical($"引发错误!");
             return View();
         }
     }

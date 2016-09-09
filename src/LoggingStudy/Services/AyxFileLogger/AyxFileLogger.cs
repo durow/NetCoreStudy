@@ -30,10 +30,13 @@ namespace LoggingStudy.Services.AyxFileLogger
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
         {
             if (!_name.StartsWith("LoggingStudy")) return;
-
+            //获取日志信息
             var message = formatter?.Invoke(state,exception);
+            //日志写入文件
             LogToFile(logLevel, message);
+            //Console.WriteLine("from ayxLog " + message);
         }
+
         //记录日志
         private void LogToFile(LogLevel level, string message)
         {

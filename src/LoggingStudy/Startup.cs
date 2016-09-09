@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Text;
 using LoggingStudy.Services.AyxFileLogger;
+using NLog.Extensions.Logging;
 
 namespace LoggingStudy
 {
@@ -33,15 +34,15 @@ namespace LoggingStudy
             services.AddMvc();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddConsole();
             loggerFactory.AddDebug();
-
             loggerFactory.AddAyxFileLogger();
+            loggerFactory.AddNLog();
             
             if (env.IsDevelopment())
             {
