@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RouteStudy.Controllers
 {
-    [Route("MyUser/[action]/{id?}/{*others}")]
+    [Area("Admin")]
     public class UserController : Controller
     {
         public IActionResult Index()

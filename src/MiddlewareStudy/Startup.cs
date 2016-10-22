@@ -119,6 +119,7 @@ namespace MiddlewareStudy
             app.UseStaticFiles();
             //添加时间记录中间件
             app.UseTimeMiddleware();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Routing.Constraints;
+using Microsoft.AspNetCore.Routing;
+using RouteStudy.Constraint;
 
 namespace RouteStudy
 {
@@ -50,13 +53,31 @@ namespace RouteStudy
             app.UseStaticFiles();
             app.UseMvc(routes =>
             {
+                //routes.MapRoute(
+                //    name: "test",
+                //    template: "TestShow",
+                //    defaults: new
+                //    {
+                //        controller="Test",
+                //        action="Show",
+                //    });
+
                 routes.MapRoute(
                     name: "areas",
                     template: "{area:exists}/{controller=Home}/{action=Index}");
 
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id:int?}/{*others}");    
+                    template: "{controller}/{action}/{id?}",
+                    defaults: new
+                    {
+                        controller = "Home",
+                        action = "Index",
+                    },
+                    constraints: new
+                    {
+                        id = new EvenRouteConstraint()
+                    });
             });
         }
     }

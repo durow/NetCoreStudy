@@ -17,6 +17,7 @@ namespace RouteStudy.Controllers
         public IActionResult About()
         {
             var list = new List<string>();
+
             foreach (var item in RouteData.Values)
             {
                 list.Add($"{item.Key}:{item.Value}");
