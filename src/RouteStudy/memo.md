@@ -1,0 +1,3 @@
+## Controller的创建
+可以有两种，POCO和继承自Controller基类。  
+关于命名，POCO可以使用XxxxxController来创建一个名称为Xxxxx的Controller，也可以显示制定Controller特性说明类是一个Controller。
