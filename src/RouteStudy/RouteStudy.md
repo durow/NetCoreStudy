@@ -42,3 +42,5 @@ UseMvcWithDefaultRoute()方法可以使用{controller}/{action}/{id?}规则
 ## 使用Areas
 一方面在路由模版中要指明area变量，以便在Area中路由，另一方面Area中的Controller必须使用Area特性以说明这个Controller是在哪个Area中
 如果不指定Area Attirbute，Controller将会同普通Controller一样参与路由。
+
+## 配置路由系统

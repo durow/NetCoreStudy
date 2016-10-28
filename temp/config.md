@@ -1,0 +1,7 @@
+## Hostring Enviroment
+ApplicationName 应用名称
+EnviromentName 描述当前环境的字符串
+ContentRootPath 应用根目录
+WebRootPath 静态内容的目录，wwwroot文件夹
+ContentRootFileProvider 根据ContentRootPath属性读取其中的文件
+WebRootFileProvider 根据WebRootPath属性读取其中的文件

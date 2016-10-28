@@ -30,6 +30,10 @@ namespace RouteStudy
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<RouteOptions>(options=>
+            {
+                options.ConstraintMap.Add("even",typeof(EvenRouteConstraint));
+            });
             // Add framework services.
             services.AddMvc();
         }
@@ -68,16 +72,16 @@ namespace RouteStudy
 
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller}/{action}/{id?}",
-                    defaults: new
-                    {
-                        controller = "Home",
-                        action = "Index",
-                    },
-                    constraints: new
-                    {
-                        id = new EvenRouteConstraint()
-                    });
+                    template: "{controller=Home}/{action=Index}/{id:even?}");
+                    // defaults: new
+                    // {
+                    //     controller = "Home",
+                    //     action = "Index",
+                    // },
+                    // constraints: new
+                    // {
+                    //     id = new EvenRouteConstraint()
+                    // });
             });
         }
     }

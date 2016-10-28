@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RouteStudy.Areas.Admin.Controllers
 {
-    [Route("durow/Test/[action]/{id=0}")]
+    [Route("durow/Test/[action]/{id?}")]
     public class TestController : Controller
     {
         // GET: /<controller>/
