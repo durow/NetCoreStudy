@@ -8,4 +8,12 @@
 主要学习.Net Core中的Logging组建，包括组件的设计，以NLog为例说明了如何集成第三方日志工具，最后继承了自己写的日志工具。
 
 ### MiddlewareStudy
-主要学习了.NetCore中中间件是如何构建成管道的，以及用中间件类的方式添加中间件需要遵循的约定，最后自己实现了一个记录请求完成时间的中间件TimeMiddleware，用于学习目的的Map和MapWhen中间件。
+主要学习了.NetCore中中间件是如何构建成管道的，以及用中间件类的方式添加中间件需要遵循的约定，最后自己实现了一个记录请求完成时间的中间件TimeMiddleware，用于学习目的的Map和MapWhen中间件。  
+[.NET Core中间件的注册和管道的构建（1）---- 注册和构建原理](http://www.cnblogs.com/durow/p/5736385.html)
+[ .NET Core中间件的注册和管道的构建（2）---- 用UseMiddleware扩展方法注册中间件类](http://www.cnblogs.com/durow/p/5748124.html)  
+[.NET Core中间件的注册和管道的构建（3） ---- 使用Map/MapWhen扩展方法](http://www.cnblogs.com/durow/p/5752055.html)
+
+### RouteStudy
+主要学习.NetCore MVC中的路由。相关文章：
+[.NetCore MVC中的路由（1）路由配置基础](http://www.cnblogs.com/durow/p/5992926.html)  
+[.NetCore MVC中的路由（2）在路由中使用约束](http://www.cnblogs.com/durow/p/6012788.html)
