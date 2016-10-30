@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RouteStudy.Areas.Admin.Controllers
 {
-    [Route("durow/Test/[action]/{id?}")]
+    [Route("durow/Test/[action]/{id:even?}")]
     public class TestController : Controller
     {
         // GET: /<controller>/
@@ -21,7 +21,7 @@ namespace RouteStudy.Areas.Admin.Controllers
                 list.Add($"{item.Key}:{item.Value}");
             }
             ViewData["Message"] = string.Join(",  ", list);
-
+            
             return View();
         }
         
