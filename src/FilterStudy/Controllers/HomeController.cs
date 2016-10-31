@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FilterStudy.Filters;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FilterStudy.Controllers
@@ -20,11 +22,16 @@ namespace FilterStudy.Controllers
             return View();
         }
 
-        public IActionResult Contact()
+        [MyAuth]
+        [MyResult]
+        [MyAction]
+        public void Contact()
         {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
+            // ViewData["Message"] = "Your contact page.";
+            // return View();
+            ResponseHelper.Write("Home.Contact Start!",HttpContext.Response);
+            ResponseHelper.Write("Home.Contact Do something!",HttpContext.Response);
+            ResponseHelper.Write("Home.Contact End!",HttpContext.Response);
         }
 
         public IActionResult Error()
