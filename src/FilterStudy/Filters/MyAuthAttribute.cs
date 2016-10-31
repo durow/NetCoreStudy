@@ -18,9 +18,12 @@ namespace FilterStudy.Filters
             if (key != "durow")
             {
                 context.Result = new StatusCodeResult(StatusCodes.Status403Forbidden);
+                ResponseHelper.Write("MyAuth.OnAuthorization Authorization failed!", context.HttpContext.Response);
             }
-
-            ResponseHelper.Write("MyAuth.OnAuthorization End!", context.HttpContext.Response);
+            else
+            {
+                ResponseHelper.Write("MyAuth.OnAuthorization Success!", context.HttpContext.Response);
+            }
         }
     }
 }
