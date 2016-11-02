@@ -17,7 +17,7 @@ namespace FilterStudy.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "检查一下是不是能够自动编译.果然可以";
 
             return View();
         }
